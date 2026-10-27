@@ -9,8 +9,8 @@ def composition_molecule(c = 0, h = 0, o = 0):
 
     Elle retourne un dictionnaire contenant la composition de la molécule avec les clés 'C', 'H', et 'O'.
     """
-
-    return {'C': c, 'H': h, 'O': o}
+    compo_carb = {'C': c, 'H': h, 'O': o}
+    return compo_carb
 
 
 def afficher_molecule(c = 0, h = 0, o = 0):
