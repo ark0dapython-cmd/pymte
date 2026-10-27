@@ -1,15 +1,28 @@
-[project]
-name = "package_pymte"
-version = "0.0.1"
-authors = [
-  { name="Ark0da_", email="ark0da.python@gmail.com" },
-]
-description = "Module destiné au BTS MTE (Moteurs Toutes Énergies)"
-readme = "README.md"
-requires-python = ">=3.14"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-license = "MIT"
-license-files = ["LICEN[CS]E*"]
+# pymte
+
+> Package Python destiné aux application du BTS MTE/MCI
+
+## Présentation
+
+...
+
+## Installation
+
+Depuis le dossier du projet :
+
+```powershell
+python -m pip install -e .
+```
+
+## Exemple d'utilisation
+
+...
+
+## Fonctionnalités
+
+- [Carburant] :
+...
+
+## Licence
+
+Ce projet est distribué sous licence MIT. Voir [LICENSE].
