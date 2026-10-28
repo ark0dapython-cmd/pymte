@@ -1,4 +1,3 @@
-from package_pymte import fuel
+from pymte import fuel
 
-print(fuel.composition_molecule(c=2, h=6, o=1))
-print(fuel.afficher_molecule(c=2, h=6, o=1))
+fuel.analyse_carburant(8, 18, 0)

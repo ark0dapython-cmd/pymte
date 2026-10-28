@@ -1,5 +1,5 @@
 [project]
-name = "package_pymte"
+name = "pymte"
 version = "0.0.1"
 authors = [
   { name="Ark0da_", email="arkoda.python@gmail.com" },

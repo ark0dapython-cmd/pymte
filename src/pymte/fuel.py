@@ -1,0 +1,178 @@
+# ===== Affichage de la molécule =====
+def afficher_molecule(c = 0, h = 0, o = 0):
+
+    """
+    Cette fonctione permet de créer une molécule a partir :
+
+    - du nombre d'atomes de carbone (c)
+    - du nombre d'atomes d'hydrogène (h)
+    - du nombre d'atomes d'oxygène (o)
+
+    Elle retourne une F-string représentant la molécule sous la forme "C{c}H{h}O{o}".
+    """
+    if o == 0 :
+        return f"C{c}H{h}"
+    elif o == 1 :
+        return f"C{c}H{h}O"
+    else :
+        return f"C{c}H{h}O{o}"
+
+# ===== Création des coefficients de l'équation stoechiométrique =====
+def creer_equation_stoechiometrique(c, h, o):
+    """
+    Cette focntion permet de créer les coefficients de l'équation stoechiométrique du carburant a partir :
+
+    - du nombre d'atomes de carbone (c)
+    - du nombre d'atomes d'hydrogène (h)
+    - du nombre d'atomes d'oxygène (o)
+
+    Elle retourne les coefficient d'air de CO2, d'H2O et de N2
+    """
+    global coef_co2
+    global coef_h2o
+    global coef_air
+    global coef_n2
+
+    coef_co2 = c
+    coef_h2o = round(h/2, 2)
+
+    if o == 0 :
+        coef_air = c + (h/4)
+    else :
+        coef_air = c + (h/4) - (o/2)
+    coef_n2 = coef_air * 3.78
+
+    return coef_co2, coef_h2o, coef_air, coef_n2
+
+
+# ===== Affichage visuelle de l'équation stoechiométrique =====
+def afficher_equation_stoechiometrique(c, h, o):
+    """
+    Cette fonction permet l'affichage de l'équation crée via la fonction creer_equation_stoechiometrique.
+
+    Elle retourne l'équation stoechiométrique sous forme de F-string.
+    """
+    global coef_co2
+    global coef_h2o
+    global coef_air
+    global coef_n2
+    
+    return f"{afficher_molecule(c, h, o)} + {coef_air} (O2 + 3.78 N2) --> {coef_co2} CO2 + {coef_h2o} H2O + {coef_n2} N2"
+
+# ===== Calcul des masses autour du carburant =====
+def calculs_masses(c, h, o):
+    """
+    Cette fonction permet de calculer les différentes masses de carburant, d'air, de co2, d'h2o et de n2 a partir de l'équation de combustion.
+
+    Elle renvoie des masses sous forme de F-strings.
+    """
+
+    global masse_co2
+    global masse_h2o
+    global masse_air
+    global masse_carburant
+    global masse_o2
+    
+    masse_carburant = round(c * M_C + h * M_H + o * M_O, 3)
+    masse_co2 = round(coef_co2 * (M_C + 2 * M_O), 3)
+    masse_h2o = round(coef_h2o * (2 * M_H + M_O), 3)
+    masse_air = round(coef_air * (2 * M_O + 2 * 3.78 * M_N), 3)
+    masse_o2 = round(coef_air * (2 * M_O), 3)
+
+    return masse_co2, masse_h2o, masse_air, masse_carburant, masse_o2
+
+# ===== Calcul de la répartition de carbone, hydrogène et oxygène dans le carburant =====
+def calcul_repartition_carburant(c, h, o):
+    """
+    Cette fonction permet de calculer la répartition des éléments dans le carburant.
+    """
+    global repart_carbone
+    global repart_hydrogene
+    global repart_oxygene
+    global masse_carburant
+
+    repart_carbone = round((c * M_C) / masse_carburant * 100, 3)
+    repart_hydrogene = round((h * M_H) / masse_carburant * 100, 3)
+
+    if o == 0 :
+        repart_oxygene = "/"
+    else :
+        repart_oxygene = round((o * M_O) / masse_carburant * 100, 3)
+
+    return repart_carbone, repart_hydrogene, repart_oxygene
+
+
+
+# ===== Calcul du rapport Air/Fuel stoechiométrique =====
+def calcul_rapport_af():
+    """
+    Cette fonction permet de déterminer le rapport Air/Fuel d'un carburant a partir de la masse d'air et de la masse de carburant.
+
+    Elle renvoie la variable rapport_af
+    """
+    global masse_air
+    global masse_carburant
+    global rapport_af
+
+    rapport_af = round(masse_air/masse_carburant, 3)
+
+    return rapport_af
+
+# ===== Calcul du rapport H/C stoechiométrique =====
+def calcul_rapport_h_c(h, c):
+    """
+    Cette fonction permet de déterminer le rapport H/C d'un carburant a partir du nombre d'atomes d'hydrogène et de carbone.
+
+    Elle renvoie la variable rapport_hc
+    """
+    global rapport_h_c
+
+    rapport_h_c = round(h/c, 3)
+
+    return rapport_h_c
+
+# ===== Calcul du rapport O/C stoechiométrique =====
+def calcul_rapport_o_c(o, c):
+    """
+    Cette fonction permet de déterminer le rapport O/C d'un carburant a partir du nombre d'atomes d'oxygène et de carbone.
+
+    Elle renvoie la variable rapport_o_c
+    """
+    global rapport_o_c
+
+    if o == 0 :
+        rapport_o_c = "/"
+    else :
+        rapport_o_c = round(o/c, 3)
+
+    return rapport_o_c
+
+
+#   =============================
+#   Fonction de l'affichage final
+#   =============================
+
+def analyse_carburant(c, h, o):
+    creer_equation_stoechiometrique(c, h, o)
+    calculs_masses(c, h, o)
+    calcul_repartition_carburant(c, h, o)
+    calcul_rapport_af()
+    calcul_rapport_h_c(h, c)
+    calcul_rapport_o_c(o, c)
+
+    print("==========ANALYSE DU CARBURANT==========")
+    print(f"\nMolecule : {afficher_molecule(c, h, o)}")
+    print(f"Equation Stoechiometrique : {afficher_equation_stoechiometrique(c, h, o)}")
+    print("\n--- Composition du carburant ---")
+    print(f"  > Masse carburant : {masse_carburant} g \n  > %Carbone : {repart_carbone} % \n  > %Hydrogene : {repart_hydrogene} % \n  > %Oxygene : {repart_oxygene} % \n  > Rapport H/C : {rapport_h_c} \n  > Rapport O/C : {rapport_o_c}")
+    print("--- Air & Stoechiometrie ---")
+    print(f"  > Besoin en O2 : {coef_air} mol \n  > Masse de O2 : {masse_o2} g \n  > Masse d'air : {masse_air} g \n  > Rapport Air/Fuel : {rapport_af}")
+    print("\n--- Produits de la combustion ---")
+    print("\n--- Composition des gazs---")
+    print("========================================")
+
+# VARIABLES GLOBALES
+M_C = 12 #g/mol
+M_H = 1 #g/mol
+M_O = 16 #g/mol
+M_N = 14 #g/mol
