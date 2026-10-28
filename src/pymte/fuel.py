@@ -153,11 +153,47 @@ def calcul_rapport_o_c(o, c):
 
     return rapport_o_c
 
+def calcul_facteur_massique():
+    """
+    Cette fonction permet de calculer le facteur massique de CO2 et H2O a partir de la masse de carburant, de CO2 et d'H2O.
+
+    Elle renvoie les variables facteur_massique_co2 et facteur_massique_h2o
+    """
+    global masse_carburant
+    global masse_co2
+    global facteur_massique_co2
+    global facteur_massique_h2o
+
+    facteur_massique_co2 = round(masse_co2/masse_carburant, 3)
+    facteur_massique_h2o = round(masse_h2o/masse_carburant, 3)
+
+    return facteur_massique_co2, facteur_massique_h2o
+
+def calcul_composition_gaz():
+    """
+    Cette fonction permet de calculer la composition des gazs a partir de la masse de CO2, H2O et N2.
+
+    Elle renvoie les variables compo_co2, compo_h2o et compo_n2
+    """
+    global masse_co2
+    global masse_h2o
+    global masse_n2
+    global compo_gaz_co2
+    global compo_gaz_h2o
+    global compo_gaz_n2
+
+    total_masse_gaz = masse_co2 + masse_h2o + masse_n2
+
+    compo_gaz_co2 = round(masse_co2/total_masse_gaz * 100, 3)
+    compo_gaz_h2o = round(masse_h2o/total_masse_gaz * 100, 3)
+    compo_gaz_n2 = round(masse_n2/total_masse_gaz * 100, 3)
+
+    return compo_gaz_co2, compo_gaz_h2o, compo_gaz_n2
 
 #   =============================
 #   Fonction de l'affichage final
 #   =============================
-
+ 
 def analyse_carburant(c, h, o):
     creer_equation_stoechiometrique(c, h, o)
     calculs_masses(c, h, o)
@@ -165,6 +201,8 @@ def analyse_carburant(c, h, o):
     calcul_rapport_af()
     calcul_rapport_h_c(h, c)
     calcul_rapport_o_c(o, c)
+    calcul_facteur_massique()
+    calcul_composition_gaz()
 
     print("==========ANALYSE DU CARBURANT==========")
     print(f"\nMolecule : {afficher_molecule(c, h, o)}")
@@ -174,9 +212,9 @@ def analyse_carburant(c, h, o):
     print("--- Air & Stoechiometrie ---")
     print(f"  > Besoin en O2 : {coef_air} mol \n  > Masse de O2 : {masse_o2} g \n  > Masse d'air : {masse_air} g \n  > Rapport Air/Fuel : {rapport_af}")
     print("--- Produits de la combustion ---")
-    print(f"  > Masse de CO2 : {masse_co2} g \n  > Masse de H2O : {masse_h2o} g \n  > Masse de N2 : {masse_n2} g \n  > facteur massique CO2 : \n  > facteur massique H2O :")
+    print(f"  > Masse de CO2 : {masse_co2} g \n  > Masse de H2O : {masse_h2o} g \n  > Masse de N2 : {masse_n2} g \n  > facteur massique CO2 : {facteur_massique_co2} \n  > facteur massique H2O : {facteur_massique_h2o}")
     print("--- Composition des gazs---")
-    print(f"  > CO2 : g \n > H2O : g \n  > N2 : g")
+    print(f"  > CO2 : {compo_gaz_co2} % \n  > H2O : {compo_gaz_h2o} % \n  > N2 : {compo_gaz_n2} %")
     print("========================================")
 
 # VARIABLES GLOBALES
