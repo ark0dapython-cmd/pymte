@@ -1,15 +1,38 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pymte"
+
 version = "0.0.1"
+
 authors = [
   { name="Ark0da_", email="arkoda.python@gmail.com" },
 ]
+
 description = "Package destiné au BTS MTE (Moteurs Toutes Énergies)"
 readme = "README.md"
+
 requires-python = ">=3.14"
+
+dependencies = [
+    "matplotlib>=3.10,<4.0",
+    "numpy>=2.0",
+    "pandas>=2.0",
+]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pymte*"]
+
+[tool.setuptools.package-dir]
+"" = "src"

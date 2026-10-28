@@ -9,6 +9,9 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.14
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: matplotlib<4.0,>=3.10
+Requires-Dist: numpy>=2.0
+Requires-Dist: pandas>=2.0
 Dynamic: license-file
 
 # pymte
