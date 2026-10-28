@@ -1,3 +1,3 @@
 from pymte import fuel
 
-fuel.analyse_carburant(8, 18, 0)
+fuel.analyse_carburant(2, 6, 1)

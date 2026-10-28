@@ -1,9 +1,13 @@
+#   =============================
+#               Code
+#   =============================
+
 # ===== Affichage de la molécule =====
 def afficher_molecule(c = 0, h = 0, o = 0):
 
     """
     Cette fonctione permet de créer une molécule a partir :
-
+²
     - du nombre d'atomes de carbone (c)
     - du nombre d'atomes d'hydrogène (h)
     - du nombre d'atomes d'oxygène (o)
@@ -72,14 +76,16 @@ def calculs_masses(c, h, o):
     global masse_air
     global masse_carburant
     global masse_o2
+    global masse_n2
     
     masse_carburant = round(c * M_C + h * M_H + o * M_O, 3)
     masse_co2 = round(coef_co2 * (M_C + 2 * M_O), 3)
     masse_h2o = round(coef_h2o * (2 * M_H + M_O), 3)
     masse_air = round(coef_air * (2 * M_O + 2 * 3.78 * M_N), 3)
     masse_o2 = round(coef_air * (2 * M_O), 3)
+    masse_n2 = round(coef_n2 * M_N, 3)
 
-    return masse_co2, masse_h2o, masse_air, masse_carburant, masse_o2
+    return masse_co2, masse_h2o, masse_air, masse_carburant, masse_o2, masse_n2
 
 # ===== Calcul de la répartition de carbone, hydrogène et oxygène dans le carburant =====
 def calcul_repartition_carburant(c, h, o):
@@ -167,8 +173,10 @@ def analyse_carburant(c, h, o):
     print(f"  > Masse carburant : {masse_carburant} g \n  > %Carbone : {repart_carbone} % \n  > %Hydrogene : {repart_hydrogene} % \n  > %Oxygene : {repart_oxygene} % \n  > Rapport H/C : {rapport_h_c} \n  > Rapport O/C : {rapport_o_c}")
     print("--- Air & Stoechiometrie ---")
     print(f"  > Besoin en O2 : {coef_air} mol \n  > Masse de O2 : {masse_o2} g \n  > Masse d'air : {masse_air} g \n  > Rapport Air/Fuel : {rapport_af}")
-    print("\n--- Produits de la combustion ---")
-    print("\n--- Composition des gazs---")
+    print("--- Produits de la combustion ---")
+    print(f"  > Masse de CO2 : {masse_co2} g \n  > Masse de H2O : {masse_h2o} g \n  > Masse de N2 : {masse_n2} g \n  > facteur massique CO2 : \n  > facteur massique H2O :")
+    print("--- Composition des gazs---")
+    print(f"  > CO2 : g \n > H2O : g \n  > N2 : g")
     print("========================================")
 
 # VARIABLES GLOBALES
