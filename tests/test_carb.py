@@ -12,6 +12,7 @@ while True :
     try :
         hydrogene = int(input("Nombre d'atomes d'hydrogène --> "))
         fuel.valider_hydrogene(hydrogene)
+        break
     except ValueError as erreur:
         print(erreur)
 
@@ -19,6 +20,7 @@ while True :
     try :
         oxygene = int(input("Nombre d'atomes d'oxygène --> "))
         fuel.valider_oxygene(oxygene)
+        break
     except ValueError as erreur:
         print(erreur)
 

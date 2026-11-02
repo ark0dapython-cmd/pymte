@@ -199,13 +199,13 @@ def valider_carbone(c):
     if type(c) is not int:
         raise TypeError("Le nombre d'atome de carbone doit être un entier.")
     if c <= 0 :
-        raise ValueError("Le nombre d'atome de carbone doit être positif.")
+        raise ValueError("Le nombre d'atome de carbone doit être supérieur à 0.")
 
 def valider_hydrogene(h):
     if type(h) is not int:
             raise TypeError("Le nombre d'atome d'hydrogène doit être un entier.")
     if h <= 0 :
-            raise ValueError("Le nombre d'atome d'hydrogène doit être positif.")
+            raise ValueError("Le nombre d'atome d'hydrogène doit être supérieur à 0.")
 
 def valider_oxygene(o):
     if type(o) is not int:
