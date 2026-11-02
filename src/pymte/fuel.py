@@ -191,6 +191,29 @@ def calcul_composition_gaz():
     return compo_gaz_co2, compo_gaz_h2o, compo_gaz_n2
 
 #   =============================
+#          Vérifications
+#   =============================
+
+def valider_carbone(c):
+        #Vérification de la conformité des types des paramètres c, h et o
+    if type(c) is not int:
+        raise TypeError("Le nombre d'atome de carbone doit être un entier.")
+    if c <= 0 :
+        raise ValueError("Le nombre d'atome de carbone doit être positif.")
+
+def valider_hydrogene(h):
+    if type(h) is not int:
+            raise TypeError("Le nombre d'atome d'hydrogène doit être un entier.")
+    if h <= 0 :
+            raise ValueError("Le nombre d'atome d'hydrogène doit être positif.")
+
+def valider_oxygene(o):
+    if type(o) is not int:
+            raise TypeError("Le nombre d'atome d'oxygène doit être un entier.")
+    if o < 0 :
+        raise ValueError("Le nombre d'atome d'oxygène doit être positif.")
+
+#   =============================
 #   Fonction de l'affichage final
 #   =============================
  
